@@ -49,6 +49,7 @@ spec:
   selector:
     app: mosquitto
   type: LoadBalancer
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
