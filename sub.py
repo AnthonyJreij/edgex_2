@@ -60,3 +60,5 @@ def main():
     time.sleep(10)
   print('WARNING: Maximum external pressure exceeded')
   reset()
+  
+main()
