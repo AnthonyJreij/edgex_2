@@ -1,0 +1,91 @@
+name: "httpSub1"
+description: "submarine instrument profile"
+deviceResources:
+-
+  name: "subDepth"
+  description: "submarine depth in water"
+  attributes: {}
+  properties:
+    value:
+      { type: "Int16", readWrite: "R", minimum: "0", maximum: "1000", defaultValue: "0" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "meters" }
+-
+  name: "subTemp"
+  description: "submarine temperature"
+  attributes: {}
+  properties:
+    value:
+      { type: "Int16", readWrite: "R", minimum: "-50", maximum: "1000", defaultValue: "0" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "degrees Celsius" }
+-
+  name: "subPressure"
+  description: "submarine pressure"
+  attributes: {}
+  properties:
+    value:
+      { type: "Int16", readWrite: "R", minimum: "0", maximum: "1000", defaultValue: "0" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "relative pressure" }
+
+-
+  name: "stopSub"
+  description: "stop submarine"
+  attributes: {}
+  properties:
+    value:
+      { type: "Bool", readWrite: "R", defaultValue: "False" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "False" }
+-
+commands:
+  -
+    name: "depth"
+    get: 
+        path: "/api/v1/device/{deviceId}/subDepth"
+        responses: 
+          - 
+            code: "200"
+            description: "Get submarine depth."
+            expectedValues: ["depth"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+  -
+    name: "pressure"
+    get: 
+        path: "/api/v1/device/{deviceId}/subPressure"
+        responses: 
+          - 
+            code: "200"
+            description: "Get submarine depth."
+            expectedValues: ["depth"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+
+  -
+    name: "stop"
+    put: 
+        path: "/api/v1/device/{deviceId}/stopSub"
+        responses: 
+          - 
+            code: "200"
+            description: "Stop submarine."
+            expectedValues: ["stop"]
+          -
+            code: "503"
+            description: "service unavailable"
+            expectedValues: []
+        
+        "url": "http://edgex-core-command:48082/api/v1/device/httpSub1/command/stopSub"
+        "parameterNames": [
+          "Bool",
+          "StopSub"
+        ]
+
+
+
